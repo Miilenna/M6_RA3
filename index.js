@@ -5,20 +5,31 @@ let comencar = document.getElementById("començarPartida");
 let borrar = document.getElementById("borrarPartida");
 let infoNavegador = navigator.userAgent;
 let infoURL = location.href;
-let estatPartida = ""
+let estatPartida = "En joc"
 let jocIniciat = false;
 let jocAcabat = false;
 let punts = 0;
+let finestra = "";
+
+//events
+comencar.addEventListener("click", comencarPartida);
+borrar.addEventListener("click", borrarPartida);
+
+if (infoNavegador.includes("Chrome")) {
+    document.body.style.backgroundColor = "#ffa500"
+}else if(infoNavegador.includes("Mozilla")) {
+    document.body.style.backgroundColor = "#a4eda5"
+}
+
 
 function comencarPartida(){
     if(!jocIniciat) {
         if (nom.value === "") {
             alert("Has d'afegir un nom per poder començar a jugar");
-        } else if (!isNaN(nom.value)) {
-            alert("No pot ser un número");
         } else {
             jocIniciat = true;
             infoPartida.textContent = "NOM: " + nom.value + ", " + "PUNTS: " + punts + ", " + "ESTAT PARTIDA: " + estatPartida;
+            finestra = window.open("joc.html");
         }
     } else if(jocAcabat) {
         return;
@@ -30,6 +41,7 @@ function borrarPartida() {
     nom.value = "";
     jocIniciat = false;
     jocAcabat = false;
+    finestra.close("joc.html");
 }
 
 document.getElementById("infoNavegador").textContent = infoNavegador;
