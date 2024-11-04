@@ -10,6 +10,7 @@ let jocIniciat = false;
 let jocAcabat = false;
 let punts = 0;
 let finestra = "";
+localStorage.setItem("nom", nom.value);
 
 //events
 comencar.addEventListener("click", comencarPartida);
@@ -33,6 +34,8 @@ function comencarPartida(){
         }
     } else if(jocAcabat) {
         return;
+    } else if (finestra && !finestra.closed) {
+        alert("Hi ha una partida començada");
     }
 }
 
