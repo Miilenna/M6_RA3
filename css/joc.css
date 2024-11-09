@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+.capçalera {
+    text-align: center;
+}
+
+.cuadrados {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    /* 4 columnas de 100px de ancho */
+    grid-gap: 10px;
+    justify-content: center;
+}
+
+.carta {
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    border-radius: 10px;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.carta.voltaDonada {
+    background-color: grey;
+    /* Color diferente para cartas volteadas */
+}
+
+button {
+    height: 40px;
+}
