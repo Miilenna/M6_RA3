@@ -10,7 +10,10 @@ let jocIniciat = false;
 let jocAcabat = false;
 let punts = 0;
 let finestra = "";
+document.getElementById("infoNavegador").textContent = infoNavegador;
+document.getElementById("infoURL").textContent = infoURL;
 
+//localstorage
 localStorage.setItem("nom", nom.value);
 localStorage.setItem("partida", infoPartida.textContent);
 
@@ -18,12 +21,14 @@ localStorage.setItem("partida", infoPartida.textContent);
 comencar.addEventListener("click", comencarPartida);
 borrar.addEventListener("click", borrarPartida);
 
+//cambia el color de la página dependiendo que navegador uses
 if (infoNavegador.includes("Chrome")) {
     document.body.style.backgroundColor = "#ffa500";
 } else if (infoNavegador.includes("Mozilla")) {
     document.body.style.backgroundColor = "#a4eda5";
 }
 
+//función para cumplir los requisitos antes de empezar la partida
 function comencarPartida() {
     if (!jocIniciat) {
         if (nom.value === "") {
@@ -40,11 +45,13 @@ function comencarPartida() {
         }
     } else if (jocAcabat) {
         return;
-    } else if (finestra && !finestra.closed) {
+    } else if (!finestra.closed) {
+        finestra = window.open("joc.html");
         alert("Hi ha una partida començada");
     }
 }
 
+//crea un canal para comunicarse entre pestañas
 const channel = new BroadcastChannel('gameChannel');
 
 channel.addEventListener('message', (event) => {
@@ -52,6 +59,7 @@ channel.addEventListener('message', (event) => {
         const estatRecibido = event.data.estat || "En joc";
         infoPartida.textContent = `NOM: ${event.data.jugador}, PUNTS: ${event.data.puntuacio}, ESTAT PARTIDA: ${estatRecibido}`;
 
+        //Si el estado de la partida está finalizada
         if (estatRecibido === "Partida finalitzada") {
             jocAcabat = true;
             jocIniciat = false;
@@ -60,6 +68,7 @@ channel.addEventListener('message', (event) => {
     }
 });
 
+//función para obtener la cookie
 function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -96,5 +105,4 @@ window.addEventListener('focus', () => {
     }
 });
 
-document.getElementById("infoNavegador").textContent = infoNavegador;
-document.getElementById("infoURL").textContent = infoURL;
+
