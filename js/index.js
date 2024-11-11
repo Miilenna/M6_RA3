@@ -10,6 +10,7 @@ let jocIniciat = false;
 let jocAcabat = false;
 let punts = 0;
 let finestra = "";
+
 localStorage.setItem("nom", nom.value);
 localStorage.setItem("partida", infoPartida.textContent);
 
@@ -32,7 +33,6 @@ function comencarPartida() {
             infoPartida.textContent = `NOM: ${nom.value}, PUNTS: ${punts}, ESTAT PARTIDA: ${estatPartida}`;
             document.cookie = "nom=" + nom.value;
 
-            // Set localStorage values after the player has entered their name
             localStorage.setItem("nom", nom.value);
             localStorage.setItem("partida", infoPartida.textContent);
 
@@ -47,7 +47,6 @@ function comencarPartida() {
 
 const channel = new BroadcastChannel('gameChannel');
 
-// Escuchar el canal de comunicación
 channel.addEventListener('message', (event) => {
     if (event.data) {
         const estatRecibido = event.data.estat || "En joc";
