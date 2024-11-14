@@ -12,7 +12,6 @@ body {
 .cuadrados {
     display: grid;
     grid-template-columns: repeat(4, 100px);
-    /* 4 columnas de 100px de ancho */
     grid-gap: 10px;
     justify-content: center;
 }
